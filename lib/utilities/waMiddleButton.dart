@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+// class CustomSlider extends StatefulWidget {
+//   double dy = 0.0;
+
+//   CustomSlider({this.dy});
+
+//   @override
+//   _CustomSliderState createState() => _CustomSliderState();
+// }
+
+// class _CustomSliderState extends State<CustomSlider> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return
+//   }
+// }
+
 // ARROW STACK
 
 class ArrowStack extends StatefulWidget {
@@ -88,7 +104,7 @@ class SmallArrow extends StatelessWidget {
 class AnimatedMiddleButton extends StatefulWidget {
   final AnimationController controller;
 
-  AnimatedMiddleButton({this.controller});
+  AnimatedMiddleButton({@required this.controller});
 
   @override
   _AnimatedMiddleButtonState createState() => _AnimatedMiddleButtonState();

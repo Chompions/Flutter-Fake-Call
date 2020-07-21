@@ -86,21 +86,21 @@ class WhatsApp extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  Center(
-                    child: Container(
-                      height: 150,
-                      width: 100,
-                      child: DragTarget<String>(
-                        builder: (context, candidateData, rejectedData) {
-                          return SizedBox();
-                        },
-                        onWillAccept: (data) => data == "Accept",
-                        onAccept: (data) {
-                          Navigator.popAndPushNamed(context, '/WhatsAppCall');
-                        },
-                      ),
-                    ),
-                  ),
+                  // Center(
+                  //   child: Container(
+                  //     height: 150,
+                  //     width: 100,
+                  //     child: DragTarget<String>(
+                  //       builder: (context, candidateData, rejectedData) {
+                  //         return SizedBox();
+                  //       },
+                  //       onWillAccept: (data) => data == "Accept",
+                  //       onAccept: (data) {
+                  //         Navigator.popAndPushNamed(context, '/WhatsAppCall');
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
                   BottomButton(),
                   SizedBox(
                     height: 30,

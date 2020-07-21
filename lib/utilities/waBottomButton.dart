@@ -12,6 +12,8 @@ class _BottomButtonState extends State<BottomButton> with TickerProviderStateMix
   Timer incomingCallTimer;
   int incomingCallDuration = 20;
   AnimationController controller;
+  bool visibleAnimation = true;
+  double buttonPosition = 0.0;
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);
@@ -81,15 +83,74 @@ class _BottomButtonState extends State<BottomButton> with TickerProviderStateMix
               ArrowStack(
                 controller: controller,
               ),
-              Draggable(
-                axis: Axis.vertical,
-                feedback: MiddleButton(),
-                child: AnimatedMiddleButton(
-                  controller: controller,
+              GestureDetector(
+                onPanStart: (details) {
+                  setState(() {
+                    visibleAnimation = false;
+                  });
+                },
+                onPanUpdate: (details) {
+                  setState(() {
+                    buttonPosition = details.localPosition.dy.clamp(-200.0, 0.0);
+                  });
+                  print(buttonPosition);
+                },
+                onPanEnd: (details) {
+                  setState(() {
+                    if (buttonPosition == -200.0) {
+                      Navigator.popAndPushNamed(context, '/WhatsAppCall');
+                    } else {
+                      buttonPosition = 0.0;
+                      visibleAnimation = true;
+                    }
+                  });
+                },
+                child: Transform.translate(
+                  offset: Offset(0.0, buttonPosition),
+                  child: Container(
+                      child: Stack(
+                    children: <Widget>[
+                      Visibility(
+                        visible: visibleAnimation == false,
+                        child: MiddleButton(),
+                      ),
+                      Visibility(
+                        visible: visibleAnimation == true,
+                        child: AnimatedMiddleButton(
+                          controller: controller,
+                        ),
+                      ),
+                    ],
+                  )),
                 ),
-                childWhenDragging: SizedBox(),
-                data: "Accept",
               ),
+              // Dismissible(
+              //     key: Key("Accept"),
+              //     direction: DismissDirection.up,
+              //     child: Container(
+              //         height: 200,
+              //         child: Align(
+              //           alignment: Alignment.bottomCenter,
+              //           child: Container(
+              //             width: 50,
+              //             height: 50,
+              //             color: Colors.black,
+              //             child: MiddleButton(),
+              //           ),
+              //         )),
+              //     dismissThresholds: {DismissDirection.up: 1},
+              //     onDismissed: (data) {
+              //       Navigator.popAndPushNamed(context, '/WhatsAppCall');
+              //     }),
+              // Draggable(
+              //   axis: Axis.vertical,
+              //   feedback: MiddleButton(),
+              //   child: AnimatedMiddleButton(
+              //     controller: controller,
+              //   ),
+              //   childWhenDragging: SizedBox(),
+              //   data: "Accept",
+              // ),
             ],
           ),
         ),
