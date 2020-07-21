@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # fake_call
 
 A new Flutter project.
@@ -14,3 +15,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# Flutter-Fake-Call
+An app to make a fake call with variety of available screens. Later the app will accept user custom incoming call screens.
+>>>>>>> ca60ff87e956e216d604931dfd1c88fcd9fa5a6a
