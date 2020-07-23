@@ -23,15 +23,15 @@ class WhatsAppIncoming extends StatelessWidget {
                             alignment: PlaceholderAlignment.middle,
                             child: Icon(
                               Icons.lock,
-                              color: Colors.white.withOpacity(.5),
-                              size: 15.0,
+                              color: Colors.white.withOpacity(.6),
+                              size: 14.0,
                             ),
                           ),
                           TextSpan(
                             text: "  End-to-end encrypted",
                             style: TextStyle(
-                              fontSize: 15.0,
-                              color: Colors.white.withOpacity(.5),
+                              fontSize: 14.0,
+                              color: Colors.white.withOpacity(.6),
                               fontWeight: FontWeight.w300,
                             ),
                           ),
@@ -44,9 +44,9 @@ class WhatsAppIncoming extends StatelessWidget {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(.3),
+                              color: Colors.black.withOpacity(.1),
                               spreadRadius: 4,
-                              blurRadius: 6,
+                              blurRadius: 5,
                             )
                           ],
                         ),
@@ -57,9 +57,9 @@ class WhatsAppIncoming extends StatelessWidget {
                       Text(
                         "Name",
                         style: TextStyle(
-                          fontSize: 35.0,
+                          fontSize: 30.0,
                           color: Colors.white,
-                          fontWeight: FontWeight.w200,
+                          fontWeight: FontWeight.w300,
                         ),
                       ),
                       Text(
@@ -108,7 +108,7 @@ class WhatsAppIncoming extends StatelessWidget {
                   Text(
                     "Swipe up to accept",
                     style: TextStyle(
-                      color: Colors.white.withOpacity(.6),
+                      color: Colors.white.withOpacity(.5),
                     ),
                   ),
                 ],

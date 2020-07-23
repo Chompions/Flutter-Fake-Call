@@ -34,7 +34,7 @@ class _BottomButtonState extends State<BottomButton> with TickerProviderStateMix
   void initState() {
     startTimer();
     controller = AnimationController(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
       vsync: this,
     )..repeat();
     super.initState();
