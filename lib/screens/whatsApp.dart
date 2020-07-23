@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utilities/waBottomButton.dart';
 
-class WhatsApp extends StatelessWidget {
+class WhatsAppIncoming extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(

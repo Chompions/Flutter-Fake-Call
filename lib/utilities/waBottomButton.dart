@@ -1,5 +1,5 @@
+import 'package:fake_call/utilities/custom_icons.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 import 'dart:async';
 import 'waMiddleButton.dart';
 
@@ -93,7 +93,7 @@ class _BottomButtonState extends State<BottomButton> with TickerProviderStateMix
                   setState(() {
                     buttonPosition = details.localPosition.dy.clamp(-200.0, 0.0);
                   });
-                  print(buttonPosition);
+                  // print(buttonPosition);
                 },
                 onPanEnd: (details) {
                   setState(() {
@@ -108,49 +108,23 @@ class _BottomButtonState extends State<BottomButton> with TickerProviderStateMix
                 child: Transform.translate(
                   offset: Offset(0.0, buttonPosition),
                   child: Container(
-                      child: Stack(
-                    children: <Widget>[
-                      Visibility(
-                        visible: visibleAnimation == false,
-                        child: MiddleButton(),
-                      ),
-                      Visibility(
-                        visible: visibleAnimation == true,
-                        child: AnimatedMiddleButton(
-                          controller: controller,
+                    child: Stack(
+                      children: <Widget>[
+                        Visibility(
+                          visible: visibleAnimation == false,
+                          child: MiddleButton(),
                         ),
-                      ),
-                    ],
-                  )),
+                        Visibility(
+                          visible: visibleAnimation == true,
+                          child: AnimatedMiddleButton(
+                            controller: controller,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-              // Dismissible(
-              //     key: Key("Accept"),
-              //     direction: DismissDirection.up,
-              //     child: Container(
-              //         height: 200,
-              //         child: Align(
-              //           alignment: Alignment.bottomCenter,
-              //           child: Container(
-              //             width: 50,
-              //             height: 50,
-              //             color: Colors.black,
-              //             child: MiddleButton(),
-              //           ),
-              //         )),
-              //     dismissThresholds: {DismissDirection.up: 1},
-              //     onDismissed: (data) {
-              //       Navigator.popAndPushNamed(context, '/WhatsAppCall');
-              //     }),
-              // Draggable(
-              //   axis: Axis.vertical,
-              //   feedback: MiddleButton(),
-              //   child: AnimatedMiddleButton(
-              //     controller: controller,
-              //   ),
-              //   childWhenDragging: SizedBox(),
-              //   data: "Accept",
-              // ),
             ],
           ),
         ),
@@ -158,13 +132,10 @@ class _BottomButtonState extends State<BottomButton> with TickerProviderStateMix
           onPressed: null,
           elevation: 0,
           fillColor: Color(0xFF0b0d0f),
-          child: Transform.rotate(
-            angle: 180 * math.pi / 180,
-            child: Icon(
-              Icons.message,
-              size: 25,
-              color: Colors.white,
-            ),
+          child: Icon(
+            MyFlutterApp.message_reply,
+            size: 25,
+            color: Colors.white,
           ),
           constraints: BoxConstraints.tightFor(
             width: 60,

@@ -21,7 +21,7 @@ class _FakeCallState extends State<FakeCall> {
       initialRoute: '/Home',
       routes: {
         '/Home': (context) => HomePage(),
-        '/WhatsApp': (context) => WhatsApp(),
+        '/WhatsAppIncoming': (context) => WhatsAppIncoming(),
         '/WhatsAppCall': (context) => WhatsAppCall(),
       },
     );

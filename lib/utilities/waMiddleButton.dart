@@ -1,21 +1,6 @@
+import 'package:fake_call/utilities/custom_icons.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
-// class CustomSlider extends StatefulWidget {
-//   double dy = 0.0;
-
-//   CustomSlider({this.dy});
-
-//   @override
-//   _CustomSliderState createState() => _CustomSliderState();
-// }
-
-// class _CustomSliderState extends State<CustomSlider> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return
-//   }
-// }
 
 // ARROW STACK
 
@@ -29,53 +14,43 @@ class ArrowStack extends StatefulWidget {
 }
 
 class _ArrowStackState extends State<ArrowStack> {
-  Animation _colorTween;
+  Animation<double> _colorTween;
 
   @override
   void initState() {
-    _colorTween = Tween(begin: 0.0, end: 1.0).animate(widget.controller);
+    _colorTween = Tween(
+      begin: 3.0,
+      end: -3.0,
+    ).animate(
+      CurvedAnimation(
+        parent: widget.controller,
+        curve: Interval(0, 0.5),
+      ),
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (bounds) {
-        return LinearGradient(
-          stops: [
-            _colorTween.value - 0.3,
-            _colorTween.value,
-            _colorTween.value + 0.3,
-          ],
-          colors: [
-            Color(0xFF1F2831),
-            Colors.white,
-            Color(0xFF1F2831),
-          ],
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-        ).createShader(bounds);
-      },
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: <Widget>[
-          Container(
-            height: 200,
-            width: 100,
-          ),
-          SmallArrow(
-            positionToHeight: 90.0,
-          ),
-          SmallArrow(
-            positionToHeight: 115.0,
-          ),
-          SmallArrow(
-            positionToHeight: 140.0,
-          ),
-          SmallArrow(
-            positionToHeight: 165.0,
-          ),
-        ],
+    return Positioned(
+      top: 0,
+      child: ShaderMask(
+        shaderCallback: (rect) {
+          return RadialGradient(
+            center: Alignment(0, _colorTween.value),
+            radius: 1,
+            colors: [
+              Colors.white,
+              Color(0xFF1F2831),
+            ],
+            // tileMode: TileMode.mirror,
+          ).createShader(rect);
+        },
+        child: Icon(
+          MyFlutterApp.swipe,
+          size: 100,
+          color: Colors.white,
+        ),
       ),
     );
   }

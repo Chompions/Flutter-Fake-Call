@@ -27,3 +27,6 @@ flutter:
     - family: HelveticaNeue
       fonts:
         - asset: fonts/HelveticaNeue Light.ttf
+    - family:  MyFlutterApp
+      fonts:
+        - asset: fonts/MyFlutterApp.ttf

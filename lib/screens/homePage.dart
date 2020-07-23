@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(
                   context,
-                  '/WhatsApp',
+                  '/WhatsAppIncoming',
                 );
               },
               child: Container(
