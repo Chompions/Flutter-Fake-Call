@@ -11,7 +11,7 @@ class WhatsAppIncoming extends StatelessWidget {
             flex: 4,
             child: Container(
               color: Color(0xFF004B44),
-              padding: EdgeInsets.only(top: 3, bottom: 6),
+              padding: EdgeInsets.only(top: 5, bottom: 6),
               child: SafeArea(
                 child: Center(
                   child: Column(
@@ -32,7 +32,6 @@ class WhatsAppIncoming extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14.0,
                               color: Colors.white.withOpacity(.6),
-                              fontWeight: FontWeight.w300,
                             ),
                           ),
                         ]),
@@ -51,7 +50,7 @@ class WhatsAppIncoming extends StatelessWidget {
                           ],
                         ),
                         child: CircleAvatar(
-                          radius: 50.0,
+                          radius: 47.0,
                         ),
                       ),
                       Text(
@@ -81,34 +80,20 @@ class WhatsAppIncoming extends StatelessWidget {
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              color: Color(0xFF1F2831),
-              padding: EdgeInsets.only(bottom: 25, left: 30, right: 30),
+              color: Color(0xFF202930),
+              padding: EdgeInsets.only(bottom: 20, left: 30, right: 30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  // Center(
-                  //   child: Container(
-                  //     height: 150,
-                  //     width: 100,
-                  //     child: DragTarget<String>(
-                  //       builder: (context, candidateData, rejectedData) {
-                  //         return SizedBox();
-                  //       },
-                  //       onWillAccept: (data) => data == "Accept",
-                  //       onAccept: (data) {
-                  //         Navigator.popAndPushNamed(context, '/WhatsAppCall');
-                  //       },
-                  //     ),
-                  //   ),
-                  // ),
                   BottomButton(),
                   SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
                   Text(
                     "Swipe up to accept",
                     style: TextStyle(
                       color: Colors.white.withOpacity(.5),
+                      fontSize: 12,
                     ),
                   ),
                 ],

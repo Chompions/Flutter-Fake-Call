@@ -2,7 +2,7 @@ import 'package:fake_call/utilities/custom_icons.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-// ARROW STACK
+//* ARROW STACK
 
 class ArrowStack extends StatefulWidget {
   final AnimationController controller;
@@ -33,7 +33,7 @@ class _ArrowStackState extends State<ArrowStack> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 0,
+      top: 30,
       child: ShaderMask(
         shaderCallback: (rect) {
           return RadialGradient(
@@ -48,7 +48,7 @@ class _ArrowStackState extends State<ArrowStack> {
         },
         child: Icon(
           MyFlutterApp.swipe,
-          size: 100,
+          size: 80,
           color: Colors.white,
         ),
       ),
@@ -56,25 +56,7 @@ class _ArrowStackState extends State<ArrowStack> {
   }
 }
 
-// SMALL ARROW
-
-class SmallArrow extends StatelessWidget {
-  SmallArrow({@required this.positionToHeight});
-
-  final double positionToHeight;
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      bottom: (positionToHeight),
-      child: Container(
-        child: Icon(Icons.expand_less, size: 40, color: Colors.white),
-      ),
-    );
-  }
-}
-
-// ANIMATED MIDDLE BUTTON
+//* ANIMATED MIDDLE BUTTON
 
 class AnimatedMiddleButton extends StatefulWidget {
   final AnimationController controller;
@@ -86,14 +68,6 @@ class AnimatedMiddleButton extends StatefulWidget {
 }
 
 class _AnimatedMiddleButtonState extends State<AnimatedMiddleButton> {
-  // Future _playAnimation() async {
-  //   try {
-  //     await widget.controller.forward().orCancel;
-  //   } on TickerCanceled {
-  //     print("Animation closed");
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return StaggerAnimation(
@@ -102,7 +76,7 @@ class _AnimatedMiddleButtonState extends State<AnimatedMiddleButton> {
   }
 }
 
-// MIDDLE BUTTON
+//* MIDDLE BUTTON
 
 class MiddleButton extends StatelessWidget {
   @override
@@ -113,37 +87,40 @@ class MiddleButton extends StatelessWidget {
         color: Color(0xFF02D65D),
       ),
       constraints: BoxConstraints.tightFor(
-        width: 60,
-        height: 60,
+        width: 56,
+        height: 56,
       ),
-      padding: EdgeInsets.all(16.0),
       child: Icon(
         Icons.call,
-        size: 30,
+        size: 28,
         color: Colors.white,
       ),
     );
   }
 }
 
-class ShakeCurve extends Curve {
-  final double begin;
-  final double end;
+//* Shake Curve
 
-  ShakeCurve(this.begin, this.end);
+class ShakeCurve extends Curve {
+  final double _begin;
+  final double _end;
+
+  ShakeCurve(this._begin, this._end);
 
   @override
   double transformInternal(double t) {
-    t = ((t - begin) / (end - begin)).clamp(0.0, 1.0) as double;
+    t = ((t - _begin) / (_end - _begin)).clamp(0.0, 1.0) as double;
     var val = (0.1 / 0.8 + t) * math.sin((2 * math.pi * t) / 0.4) + 0.5;
     // var val = math.sin(3 * 2 * math.pi * t) * 0.5 + 0.5;
     return val;
   }
 }
 
+//* Stagger Animation
+
 class StaggerAnimation extends StatelessWidget {
   StaggerAnimation({this.controller})
-      : moveUp = Matrix4Tween(
+      : _moveUp = Matrix4Tween(
           begin: Matrix4.translationValues(0, 0, 0),
           end: Matrix4.translationValues(0, -30, 0),
         ).animate(
@@ -152,7 +129,7 @@ class StaggerAnimation extends StatelessWidget {
             curve: Interval(0, 0.25),
           ),
         ),
-        moveDown = Tween<double>(
+        _moveDown = Tween<double>(
           begin: 0,
           end: 30,
         ).animate(
@@ -161,7 +138,7 @@ class StaggerAnimation extends StatelessWidget {
             curve: Interval(0.35, 0.5),
           ),
         ),
-        shake = Tween<double>(
+        _shake = Tween<double>(
           begin: -2,
           end: 2,
         ).animate(
@@ -173,11 +150,11 @@ class StaggerAnimation extends StatelessWidget {
 
   Widget _buildAnimation(BuildContext context, Widget child) {
     return Container(
-      transform: moveUp.value,
+      transform: _moveUp.value,
       child: Container(
         transform: Matrix4.translationValues(
-          shake.value,
-          moveDown.value,
+          _shake.value,
+          _moveDown.value,
           0,
         ),
         child: MiddleButton(),
@@ -186,9 +163,9 @@ class StaggerAnimation extends StatelessWidget {
   }
 
   final Animation controller;
-  final Animation moveUp;
-  final Animation moveDown;
-  final Animation shake;
+  final Animation _moveUp;
+  final Animation _moveDown;
+  final Animation _shake;
 
   @override
   Widget build(BuildContext context) {

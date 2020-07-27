@@ -8,10 +8,10 @@ class WhatsAppCall extends StatelessWidget {
         child: Column(
       children: <Widget>[
         Expanded(
-          flex: 2,
+          flex: 8,
           child: Container(
             width: double.infinity,
-            padding: EdgeInsets.only(top: 3, bottom: 20, left: 5, right: 10),
+            padding: EdgeInsets.only(top: 4, bottom: 17, left: 5, right: 10),
             color: Color(0xFF004B44),
             child: SafeArea(
               child: Column(
@@ -25,7 +25,7 @@ class WhatsAppCall extends StatelessWidget {
                         child: Icon(
                           Icons.expand_more,
                           color: Colors.white,
-                          size: 40,
+                          size: 38,
                         ),
                       ),
                       Align(
@@ -45,7 +45,6 @@ class WhatsAppCall extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 14.0,
                                 color: Colors.white.withOpacity(.6),
-                                fontWeight: FontWeight.w300,
                               ),
                             ),
                           ]),
@@ -56,7 +55,7 @@ class WhatsAppCall extends StatelessWidget {
                         child: Icon(
                           Icons.person_add,
                           color: Colors.white,
-                          size: 27,
+                          size: 25,
                         ),
                       )
                     ],
@@ -76,7 +75,7 @@ class WhatsAppCall extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 6,
+          flex: 25,
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: <Widget>[
@@ -93,7 +92,7 @@ class WhatsAppCall extends StatelessWidget {
                   fillColor: Color(0xFFE91C43),
                   child: Icon(
                     Icons.call_end,
-                    size: 30,
+                    size: 32,
                     color: Colors.white,
                   ),
                   constraints: BoxConstraints.tightFor(
@@ -101,14 +100,13 @@ class WhatsAppCall extends StatelessWidget {
                     height: 60,
                   ),
                   shape: CircleBorder(),
-                  padding: EdgeInsets.all(16.0),
                 ),
               ),
             ],
           ),
         ),
         Expanded(
-          flex: 1,
+          flex: 4,
           child: Container(
             color: Color(0xFF004B44),
             child: Row(
@@ -122,7 +120,7 @@ class WhatsAppCall extends StatelessWidget {
                 Icon(
                   Icons.videocam,
                   color: Color(0xFFB4CAC7),
-                  size: 32,
+                  size: 31,
                 ),
                 Icon(
                   Icons.mic_off,
@@ -144,31 +142,30 @@ class TickingTimer extends StatefulWidget {
 }
 
 class _TickingTimerState extends State<TickingTimer> {
-  bool currentRun;
-  int intMin = 0;
-  int intSec = 00;
-  String seconds = "00";
-  String minutes = "0";
-  Timer callTimer;
+  int _intMin = 0;
+  int _intSec = 00;
+  String _seconds = "00";
+  String _minutes = "0";
+  Timer _callTimer;
 
-  void startTimer() {
-    callTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (intSec < 9) {
+  void _startTimer() {
+    _callTimer ??= Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_intSec < 9) {
         setState(() {
-          intSec++;
-          seconds = "0$intSec";
+          _intSec++;
+          _seconds = "0$_intSec";
         });
-      } else if (intSec == 59) {
+      } else if (_intSec == 59) {
         setState(() {
-          intSec = 0;
-          intMin++;
-          seconds = "0$intSec";
-          minutes = "$intMin";
+          _intSec = 0;
+          _intMin++;
+          _seconds = "0$_intSec";
+          _minutes = "$_intMin";
         });
       } else {
         setState(() {
-          intSec++;
-          seconds = "$intSec";
+          _intSec++;
+          _seconds = "$_intSec";
         });
       }
     });
@@ -176,30 +173,23 @@ class _TickingTimerState extends State<TickingTimer> {
 
   @override
   void initState() {
-    setState(() {
-      currentRun = true;
-    });
-    startTimer();
+    _startTimer();
     super.initState();
   }
 
   @override
   void dispose() {
-    setState(() {
-      currentRun = false;
-      callTimer.cancel();
-    });
+    _callTimer.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      "$minutes:$seconds",
+      "$_minutes:$_seconds",
       style: TextStyle(
-        fontSize: 17.0,
+        fontSize: 15.0,
         color: Colors.white,
-        fontWeight: FontWeight.w300,
       ),
     );
   }

@@ -9,21 +9,20 @@ class BottomButton extends StatefulWidget {
 }
 
 class _BottomButtonState extends State<BottomButton> with TickerProviderStateMixin {
-  Timer incomingCallTimer;
-  int incomingCallDuration = 20;
-  AnimationController controller;
-  bool visibleAnimation = true;
-  double buttonPosition = 0.0;
+  Timer _incomingCallTimer;
+  int _incomingCallDuration = 20;
+  AnimationController _controller;
+  bool _visibleAnimation = true;
+  double _buttonPosition = 0.0;
 
   void startTimer() {
-    const oneSec = Duration(seconds: 1);
-    incomingCallTimer = Timer.periodic(oneSec, (timer) {
+    _incomingCallTimer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
-        if (incomingCallDuration < 1) {
-          incomingCallTimer.cancel();
+        if (_incomingCallDuration < 1) {
+          _incomingCallTimer.cancel();
           Navigator.pop(context);
         } else {
-          incomingCallDuration = incomingCallDuration - 1;
+          _incomingCallDuration = _incomingCallDuration - 1;
           // print(incomingCallDuration);
         }
       });
@@ -33,7 +32,7 @@ class _BottomButtonState extends State<BottomButton> with TickerProviderStateMix
   @override
   void initState() {
     startTimer();
-    controller = AnimationController(
+    _controller = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
     )..repeat();
@@ -42,8 +41,8 @@ class _BottomButtonState extends State<BottomButton> with TickerProviderStateMix
 
   @override
   void dispose() {
-    incomingCallTimer.cancel();
-    controller.dispose();
+    _incomingCallTimer.cancel();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -58,18 +57,17 @@ class _BottomButtonState extends State<BottomButton> with TickerProviderStateMix
             Navigator.pop(context);
           },
           elevation: 0,
-          fillColor: Color(0xFF0b0d0f),
+          fillColor: Color(0xFF1A2227),
           child: Icon(
             Icons.call_end,
-            size: 30,
+            size: 27,
             color: Colors.red,
           ),
           constraints: BoxConstraints.tightFor(
-            width: 60,
-            height: 60,
+            width: 55,
+            height: 55,
           ),
           shape: CircleBorder(),
-          padding: EdgeInsets.all(16.0),
         ),
         Container(
           alignment: Alignment.bottomCenter,
@@ -81,43 +79,43 @@ class _BottomButtonState extends State<BottomButton> with TickerProviderStateMix
                 width: 100,
               ),
               ArrowStack(
-                controller: controller,
+                controller: _controller,
               ),
               GestureDetector(
                 onPanStart: (details) {
                   setState(() {
-                    visibleAnimation = false;
+                    _visibleAnimation = false;
                   });
                 },
                 onPanUpdate: (details) {
                   setState(() {
-                    buttonPosition = details.localPosition.dy.clamp(-200.0, 0.0);
+                    _buttonPosition = details.localPosition.dy.clamp(-200.0, 0.0);
                   });
                   // print(buttonPosition);
                 },
                 onPanEnd: (details) {
                   setState(() {
-                    if (buttonPosition == -200.0) {
+                    if (_buttonPosition == -200.0) {
                       Navigator.popAndPushNamed(context, '/WhatsAppCall');
                     } else {
-                      buttonPosition = 0.0;
-                      visibleAnimation = true;
+                      _buttonPosition = 0.0;
+                      _visibleAnimation = true;
                     }
                   });
                 },
                 child: Transform.translate(
-                  offset: Offset(0.0, buttonPosition),
+                  offset: Offset(0.0, _buttonPosition),
                   child: Container(
                     child: Stack(
                       children: <Widget>[
                         Visibility(
-                          visible: visibleAnimation == false,
+                          visible: _visibleAnimation == false,
                           child: MiddleButton(),
                         ),
                         Visibility(
-                          visible: visibleAnimation == true,
+                          visible: _visibleAnimation == true,
                           child: AnimatedMiddleButton(
-                            controller: controller,
+                            controller: _controller,
                           ),
                         ),
                       ],
@@ -129,17 +127,19 @@ class _BottomButtonState extends State<BottomButton> with TickerProviderStateMix
           ),
         ),
         RawMaterialButton(
-          onPressed: null,
+          onPressed: () {
+            Navigator.pop(context);
+          },
           elevation: 0,
-          fillColor: Color(0xFF0b0d0f),
+          fillColor: Color(0xFF1A2227),
           child: Icon(
             MyFlutterApp.message_reply,
-            size: 25,
+            size: 20,
             color: Colors.white,
           ),
           constraints: BoxConstraints.tightFor(
-            width: 60,
-            height: 60,
+            width: 55,
+            height: 55,
           ),
           shape: CircleBorder(),
         ),
