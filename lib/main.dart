@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'screens/homePage.dart';
-import 'screens/whatsApp.dart';
+import 'screens/whatsAppIncoming.dart';
 import 'screens/whatsAppCall.dart';
+import 'screens/profileCreate.dart';
 
-void main() => runApp(FakeCall());
+main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(FakeCall());
+}
 
 class FakeCall extends StatefulWidget {
   @override
@@ -20,9 +24,10 @@ class _FakeCallState extends State<FakeCall> {
       ),
       initialRoute: '/Home',
       routes: {
-        '/Home': (context) => HomePage(),
-        '/WhatsAppIncoming': (context) => WhatsAppIncoming(),
+        HomePage.routeName: (context) => HomePage(),
+        WhatsAppIncoming.routeName: (context) => WhatsAppIncoming(),
         '/WhatsAppCall': (context) => WhatsAppCall(),
+        ProfileCreate.routeName: (context) => ProfileCreate(),
       },
     );
   }

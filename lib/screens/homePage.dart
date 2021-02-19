@@ -1,41 +1,34 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  static const routeName = '/Home';
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Fake Call"),
+        title: Text("Infake Call"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  '/WhatsAppIncoming',
-                );
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                ),
-                constraints: BoxConstraints.tightFor(
-                  width: 120,
-                  height: 50,
-                ),
-                child: Center(
-                    child: Text(
-                  "Whatsapp Call",
-                  style: TextStyle(color: Colors.white),
-                )),
-              ),
-            ),
-          ],
-        ),
+      body: Column(
+        children: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/WhatsAppIncoming');
+            },
+            child: Text("Whatsapp"),
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/ProfileCreate');
+            },
+            child: Text("Profile Create"),
+          ),
+        ],
       ),
     );
   }

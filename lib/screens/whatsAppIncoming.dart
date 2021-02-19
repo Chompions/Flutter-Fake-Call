@@ -1,9 +1,14 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../utilities/waBottomButton.dart';
 
 class WhatsAppIncoming extends StatelessWidget {
+  static const routeName = '/WhatsAppIncoming';
+
   @override
   Widget build(BuildContext context) {
+    final InfoWhatsAppIncoming args = ModalRoute.of(context).settings.arguments;
+
     return Material(
       child: Column(
         children: <Widget>[
@@ -50,11 +55,14 @@ class WhatsAppIncoming extends StatelessWidget {
                           ],
                         ),
                         child: CircleAvatar(
+                          backgroundImage: args.image != null
+                              ? Image.file(args.image).image
+                              : AssetImage('assets/default-profile.jpg'),
                           radius: 47.0,
                         ),
                       ),
                       Text(
-                        "Name",
+                        "${args.name}",
                         style: TextStyle(
                           fontSize: 30.0,
                           color: Colors.white,
@@ -104,4 +112,11 @@ class WhatsAppIncoming extends StatelessWidget {
       ),
     );
   }
+}
+
+class InfoWhatsAppIncoming {
+  final String name;
+  final File image;
+
+  InfoWhatsAppIncoming(this.name, this.image);
 }
